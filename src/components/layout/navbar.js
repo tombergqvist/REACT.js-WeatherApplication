@@ -8,7 +8,7 @@ export default class Navbar extends Component {
             <div>
                 <nav className="navbar navbar-expand-md bg-dark navbar-dark" >
                     <NavLink className="navbar-brand" to="/">
-                        Weather Application 9000
+                        -WORK IN PROGRESS-
                     </NavLink>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
