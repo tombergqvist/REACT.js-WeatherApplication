@@ -1,28 +1,58 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './index.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './components/layout/navbar'
+// import Search from './components/pages/search'
+import Start from './components/pages/start'
+import Details from './components/pages/details'
 
-class App extends Component {
+export default class App extends Component {
+
+  state = {
+    defaultLocation: "Stockholm",
+    location: null
+  }
+
+  componentDidMount() {
+
+  }
+
+  details = (loc) => {
+    this.setState({
+      location: loc
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          {/* <Search onSubmit={this.handleSearch} /> */}
+        </div>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Start
+                isAuthed={true}
+                location={this.state.defaultLocation}
+                onClick={this.details}
+              />
+            )}
+          />
+          <Route
+            path="/location/:location"
+            render={(props) => (
+              <Details
+                {...props}
+                isAuthed={true}
+              />
+            )}
+          />
+        </Switch>
+      </BrowserRouter>
+    )
   }
 }
-
-export default App;
