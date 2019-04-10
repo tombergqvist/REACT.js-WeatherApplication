@@ -4,22 +4,31 @@ import { getForecast } from '../API/webapi'
 export default class Details extends Component {
 
     state = {
-        location: this.props.match.params.location,
-        details: []
+        details: [],
+        error: "Sorry! We could not find the location."
     }
 
-    componentDidMount = () => {
-        getForecast(this.state.location, 5).then((res) => {
+    updateState = (loc) => {
+        console.log("UpdateState(): " + loc)
+
+        getForecast(loc, 5).then(res => {
             this.setState({
                 details: res
             })
         })
     }
 
-    render() {
-        if (this.state.details.location !== undefined) {
-            console.log(this.state.details)
+    componentWillMount = () => {
+        this.updateState(this.props.match.params.location)
+    }
 
+    componentWillReceiveProps = (props) => {
+        this.updateState(props.match.params.location)
+    }
+
+    render() {
+        console.log("RENDER()")
+        if (this.state.details.location !== undefined) {
             let days = this.state.details.forecast.forecastday.map((day) => {
                 return (
                     <div key={day.date}>
@@ -47,9 +56,6 @@ export default class Details extends Component {
                                 Forecast for {this.state.details.location.name}, {this.state.details.location.country}
                             </h2>
                             {days}
-                            {/* <img src={this.state.details.condition.icon} alt="Weather condition."></img>
-                            <p>Temperature: <span className="temp">{this.state.details.temp_c} °C</span></p>
-                            <p>Time: {this.state.location.localtime}</p> */}
                         </div>
                     </div>
                 </div>
@@ -57,7 +63,7 @@ export default class Details extends Component {
         }
         return (
             <div>
-                <h2>Sorry! We could not find that location.</h2>
+                <h5>{this.state.error}</h5>
             </div>
         )
     }

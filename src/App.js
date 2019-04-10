@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './index.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './components/layout/navbar'
-// import Search from './components/pages/search'
+import Search from './components/pages/search'
 import Start from './components/pages/start'
 import Details from './components/pages/details'
 
@@ -23,12 +23,20 @@ export default class App extends Component {
     })
   }
 
+  onSearch = (loc) => {
+      this.setState({
+        location: loc
+      })
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          {/* <Search onSubmit={this.handleSearch} /> */}
+          <Search 
+            onClick={this.onSearch}
+          />
         </div>
         <Switch>
           <Route

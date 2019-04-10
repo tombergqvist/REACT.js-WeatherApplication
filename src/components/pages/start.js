@@ -27,21 +27,21 @@ export default class Start extends Component {
         if (this.state.location.name !== undefined) {
             return (
                 <div>
-                    <div className="card bg-light mb-3">
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                Current weather for {this.state.location.name}, {this.state.location.country}
-                            </h2>
-                            <img src={this.state.details.condition.icon} alt="Weather condition."></img>
-                            <p>Temperature: <span className="temp">{this.state.details.temp_c} °C</span></p>
-                            <p>Time: {this.state.location.localtime}</p>
-                            <NavLink className="btn btn-primary"
-                                to={"/location/" + this.state.location.name}
-                                key={this.state.location.name}
-                                onClick={this.handleClick}>
-                                Details
-                            </NavLink>
-                        </div>
+
+                    <div className="card bg-light mb-3 card-hover">
+                        <NavLink className="start-link"
+                            to={"/location/" + this.state.location.name}
+                            key={this.state.location.name}
+                            onClick={this.handleClick}>
+                            <div className="card-body">
+                                <h2 className="card-title">
+                                    Current weather for {this.state.location.name}, {this.state.location.country}
+                                </h2>
+                                <img src={this.state.details.condition.icon} alt="Weather condition."></img>
+                                <p>Temperature: <span className="temp">{this.state.details.temp_c} °C</span></p>
+                                <p>Time: {this.state.location.localtime}</p>
+                            </div>
+                        </NavLink>
                     </div>
                 </div>
             )
