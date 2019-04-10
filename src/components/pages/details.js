@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getForecast } from '../API/webapi'
+import { NavLink } from 'react-router-dom'
 
 export default class Details extends Component {
 
@@ -9,13 +10,15 @@ export default class Details extends Component {
     }
 
     updateState = (loc) => {
-        console.log("UpdateState(): " + loc)
-
         getForecast(loc, 5).then(res => {
             this.setState({
                 details: res
             })
         })
+    }
+
+    addToFavorites = () => {
+        this.props.addToFavorites(this.state.details.location)
     }
 
     componentWillMount = () => {
@@ -27,7 +30,6 @@ export default class Details extends Component {
     }
 
     render() {
-        console.log("RENDER()")
         if (this.state.details.location !== undefined) {
             let days = this.state.details.forecast.forecastday.map((day) => {
                 return (
@@ -54,7 +56,14 @@ export default class Details extends Component {
                         <div className="card-body">
                             <h2 className="card-title">
                                 Forecast for {this.state.details.location.name}, {this.state.details.location.country}
+
                             </h2>
+                            <span className="addToFav" onClick={this.addToFavorites}>
+                                <i className="material-icons">favorite</i>
+                                Add to favorites
+                            </span>
+                            <hr />
+
                             {days}
                         </div>
                     </div>

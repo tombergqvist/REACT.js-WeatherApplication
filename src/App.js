@@ -5,16 +5,32 @@ import Navbar from './components/layout/navbar'
 import Search from './components/pages/search'
 import Start from './components/pages/start'
 import Details from './components/pages/details'
+import * as Favorites from './components/Cache/cacheFavorites'
+import FavoriteList from './components/pages/favoriteList';
+
 
 export default class App extends Component {
 
   state = {
     defaultLocation: "Stockholm",
-    location: null
+    location: undefined,
+    favorites: undefined
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
+    let favorites = Favorites.load()
+    if (favorites !== undefined) {
+      this.setState({
+        favorites: favorites
+      })
+    }
+  }
 
+  addToFavorites = (loc) => {
+    Favorites.save(loc)
+    this.setState({
+      favorites: Favorites.load()
+    })
   }
 
   setLocation = (loc) => {
@@ -28,7 +44,7 @@ export default class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          <Search 
+          <Search
             onClick={this.setLocation}
           />
         </div>
@@ -50,10 +66,14 @@ export default class App extends Component {
               <Details
                 {...props}
                 isAuthed={true}
+                addToFavorites={this.addToFavorites}
               />
             )}
           />
         </Switch>
+        <FavoriteList
+          favorites={this.state.favorites}
+        />
       </BrowserRouter>
     )
   }

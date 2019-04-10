@@ -31,7 +31,24 @@ div.forecast {
   color: black;
   text-decoration: none;
 }
+div.card-hover {
+  transition: background-color 0.5s;
+}
 
 div.card-hover:hover {
-  background-color: rgb(227, 231, 243)!important;
+  background-color: rgb(207, 212, 226)!important;
+}
+
+div.favorite-card {
+  float: left;
+}
+
+.addToFav {
+  color: rgb(30, 124, 272);
+  cursor: pointer;
+}
+
+.addToFav:hover {
+  color: rgb(30, 100, 150);
+  text-decoration: underline;
 }
