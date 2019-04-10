@@ -17,16 +17,10 @@ export default class App extends Component {
 
   }
 
-  details = (loc) => {
+  setLocation = (loc) => {
     this.setState({
       location: loc
     })
-  }
-
-  onSearch = (loc) => {
-      this.setState({
-        location: loc
-      })
   }
 
   render() {
@@ -35,7 +29,7 @@ export default class App extends Component {
         <div className="App">
           <Navbar />
           <Search 
-            onClick={this.onSearch}
+            onClick={this.setLocation}
           />
         </div>
         <Switch>
@@ -46,7 +40,7 @@ export default class App extends Component {
               <Start
                 isAuthed={true}
                 location={this.state.defaultLocation}
-                onClick={this.details}
+                onClick={this.setLocation}
               />
             )}
           />
