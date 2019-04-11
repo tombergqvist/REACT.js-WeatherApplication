@@ -26,10 +26,8 @@ export default class Start extends Component {
     }
 
     componentDidMount = () => {
-        console.log("M")
         getLocation(res => {
             let success = false
-            console.log(res)
             if (res !== undefined && res.info.statuscode === 0) {
                 if(res.results[0].locations[0] !== undefined && res.results[0].locations[0].adminArea5 !== ""){
                     success = true
@@ -53,7 +51,6 @@ export default class Start extends Component {
     }
 
     render() {
-        console.log("R")
         if (this.state.location !== undefined) {
             return (
                 <div>
