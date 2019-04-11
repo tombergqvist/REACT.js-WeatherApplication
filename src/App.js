@@ -7,7 +7,7 @@ import Start from './components/pages/start'
 import Details from './components/pages/details'
 import * as Favorites from './components/Cache/cacheFavorites'
 import FavoriteList from './components/pages/favoriteList';
-
+import About from './components/pages/about'
 
 export default class App extends Component {
 
@@ -58,7 +58,6 @@ export default class App extends Component {
             render={() => (
               <Start
                 isAuthed={true}
-                // location={this.state.defaultLocation}
                 setDefaultLocation={this.state.setDefaultLocation}
                 onClick={this.setLocation}
               />
@@ -71,6 +70,14 @@ export default class App extends Component {
                 {...props}
                 isAuthed={true}
                 addToFavorites={this.addToFavorites}
+              />
+            )}
+          />
+          <Route
+            path="/about"
+            render={() => (
+              <About
+                isAuthed={true}
               />
             )}
           />

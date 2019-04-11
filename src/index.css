@@ -52,3 +52,25 @@ div.favorite-card {
   color: rgb(30, 100, 150);
   text-decoration: underline;
 }
+
+.navbar-brand {
+  color: white;
+}
+
+.link {
+  color: white;
+  padding: 10px;
+}
+
+.link:hover {
+  color: rgb(230, 6, 6);
+  text-decoration: none;
+}
+
+#search-field {
+  width: 100%;
+}
+
+.nav-bg {
+  background-color: rgb(66, 8, 8);
+}

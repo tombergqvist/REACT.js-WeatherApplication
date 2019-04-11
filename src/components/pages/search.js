@@ -28,10 +28,10 @@ class Search extends Component {
     render (){
         return (
             <div>
-                <input type="text" id="search-field" placeholder="location" onChange={this.handleChange} onKeyUp={this.handleKeyUp}></input>
-                <NavLink to={"/location/" + this.state.search} key={this.state.search}>
-                    <button id="search-button" onClick={this.handleClick}>Search</button>
-                </NavLink>
+                <input type="text" id="search-field" placeholder="Search on location" onChange={this.handleChange} onKeyUp={this.handleKeyUp}></input>
+                {/* <NavLink to={"/location/" + this.state.search} key={this.state.search}>
+                    <button id="search-button" className="btn-light" onClick={this.handleClick}>Search</button>
+                </NavLink> */}
             </div>
         )
     }
