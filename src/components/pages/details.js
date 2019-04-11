@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getForecast } from '../API/webapi'
-import { NavLink } from 'react-router-dom'
 
 export default class Details extends Component {
 

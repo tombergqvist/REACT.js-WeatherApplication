@@ -1,21 +1,50 @@
 import React, { Component } from 'react';
-import { getCurrent } from '../API/webapi'
+import { getCurrent, getLocation } from '../API/webapi'
 import { NavLink } from 'react-router-dom'
 
 export default class Start extends Component {
 
-    state = {
-        defaultLocation: this.props.location,
-        location: [],
-        details: []
+    constructor() {
+        super()
+        this.state = {
+            defaultLocation: "Stockholm",
+            location: undefined,
+            details: [],
+            geoLocated: false
+        }
+
     }
 
-    componentDidMount = () => {
-        getCurrent(this.state.defaultLocation).then((res) => {
+    setLocation = () => {
+        getCurrent(this.state.defaultLocation).then(res => {
             this.setState({
                 location: res.location,
                 details: res.current
+            }, () => {
             })
+        })
+    }
+
+    componentDidMount = () => {
+        console.log("M")
+        getLocation(res => {
+            let success = false
+            console.log(res)
+            if (res !== undefined && res.info.statuscode === 0) {
+                if(res.results[0].locations[0] !== undefined && res.results[0].locations[0].adminArea5 !== ""){
+                    success = true
+                }
+            }
+
+            if(success) {
+                this.setState({
+                    defaultLocation: res.results[0].locations[0].adminArea5,
+                    geoLocated: true
+                }, () => this.setLocation())
+            }
+            else{
+                this.setLocation()
+            }
         })
     }
 
@@ -24,7 +53,8 @@ export default class Start extends Component {
     }
 
     render() {
-        if (this.state.location.name !== undefined) {
+        console.log("R")
+        if (this.state.location !== undefined) {
             return (
                 <div>
 

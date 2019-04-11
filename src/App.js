@@ -11,19 +11,13 @@ import FavoriteList from './components/pages/favoriteList';
 
 export default class App extends Component {
 
-  state = {
-    defaultLocation: "Stockholm",
-    location: undefined,
-    favorites: undefined
-  }
+  constructor() {
+    super()
 
-  componentDidMount = () => {
-    let favorites = Favorites.load()
-    if (favorites !== undefined) {
-      this.setState({
-        favorites: favorites
-      })
-    }
+    this.state = {
+      location: undefined,
+      favorites: undefined
+    }    
   }
 
   addToFavorites = (loc) => {
@@ -37,6 +31,15 @@ export default class App extends Component {
     this.setState({
       location: loc
     })
+  }
+
+  componentDidMount = () => {
+    let favorites = Favorites.load()
+    if (favorites !== undefined) {
+      this.setState({
+        favorites: favorites
+      })
+    }
   }
 
   render() {
@@ -55,7 +58,8 @@ export default class App extends Component {
             render={() => (
               <Start
                 isAuthed={true}
-                location={this.state.defaultLocation}
+                // location={this.state.defaultLocation}
+                setDefaultLocation={this.state.setDefaultLocation}
                 onClick={this.setLocation}
               />
             )}
