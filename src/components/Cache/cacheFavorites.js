@@ -4,7 +4,7 @@ export function save(location){
         favorites = [location]
     }
     else{
-        if(!favorites.some(item => item.name === location.name)){
+        if(!favorites.some(item => item.name === location.name && item.country === location.country)){
             favorites.push(location)
         }
     }

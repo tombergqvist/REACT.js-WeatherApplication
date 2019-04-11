@@ -12,7 +12,7 @@ export default class FavoriteList extends Component {
                     {this.props.favorites.map(favorite => {
                         return (<Favorite
                             location={favorite}
-                            key={favorite.name}
+                            key={favorite.name+"/"+favorite.country}
                         ></Favorite>)
                     })}
                 </div>
