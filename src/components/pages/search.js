@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
-export default class Search extends Component {
+class Search extends Component {
 
     state = {
         search: null
@@ -18,10 +18,17 @@ export default class Search extends Component {
         this.props.onClick(this.state.search)
     }
 
+    handleKeyUp = (e) => {
+        e.preventDefault()
+        if (e.keyCode === 13) {
+            this.props.history.push("/location/"+this.state.search)
+        }
+    }
+
     render (){
         return (
             <div>
-                <input type="text" id="search-field" placeholder="location" onChange={this.handleChange}></input>
+                <input type="text" id="search-field" placeholder="location" onChange={this.handleChange} onKeyUp={this.handleKeyUp}></input>
                 <NavLink to={"/location/" + this.state.search} key={this.state.search}>
                     <button id="search-button" onClick={this.handleClick}>Search</button>
                 </NavLink>
@@ -29,3 +36,5 @@ export default class Search extends Component {
         )
     }
 }
+
+export default withRouter(Search)
