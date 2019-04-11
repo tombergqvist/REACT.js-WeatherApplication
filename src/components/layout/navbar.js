@@ -8,7 +8,8 @@ export default class Navbar extends Component {
             <div>
                 <nav className="navbar navbar-expand-md navbar-dark nav-bg" >
                     <NavLink className="navbar-brand" to="/">
-                        React WeatherApp
+                        <i className="material-icons">language</i>
+                        React.js Weather
                     </NavLink>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

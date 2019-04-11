@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 class Search extends Component {
 
     state = {
-        search: null
+        search: ""
     }
 
     handleChange = (e) => {
@@ -20,7 +20,7 @@ class Search extends Component {
 
     handleKeyUp = (e) => {
         e.preventDefault()
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && this.state.search !== "") {
             this.props.history.push("/location/"+this.state.search)
         }
     }
